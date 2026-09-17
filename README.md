@@ -68,8 +68,11 @@ script — never a directive inside it.
 ```bash
 uv sync
 uv run scripts/smoke.py                       # temp-project smoke test (mirrors eslint-config/scripts/smoke.mjs)
-uv run cognirail-python-lint-config check    # this package's Python follows the sister baseline
+uvx cognirail-python-lint-config check        # this package's Python follows the sister baseline via its public CLI
 uv run cognirail-bash-lint-config check      # (no Bash in this repo; sanity: exits 0)
+
+The sister baseline is consumed only through its CLI (it syncs `.cognirail/ruff-baseline.toml`); the two
+repositories have no path dependency on each other.
 ```
 
 ## Versioning

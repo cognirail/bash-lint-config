@@ -37,17 +37,13 @@ packages = ["src/cognirail_bash_lint_config"]
 [tool.hatch.build.targets.sdist]
 include = ["src/", "scripts/", "README.md", "pyproject.toml"]
 
-# 本包的 Python 源码遵守姊妹包 cognirail-python-lint-config 的基线（dogfooding）。
-[dependency-groups]
-dev = ["cognirail-python-lint-config"]
-
-[tool.uv.sources]
-cognirail-python-lint-config = { path = "../python-lint-config", editable = true }
-
+# 本包的 Python 源码遵守姊妹包 cognirail-python-lint-config 的基线。
+# 两个可发布仓之间不建立 path 依赖：开发时用 `uvx cognirail-python-lint-config check` 走公开 CLI，
+# 它会把基线同步到 .cognirail/ruff-baseline.toml，本文件只 extend 这个受管副本。
 [tool.ruff]
-extend = "../python-lint-config/src/cognirail_python_lint_config/configs/ruff.toml"
+extend = ".cognirail/ruff-baseline.toml"
 
-[tool.ruff.lint.per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 # 具名特例：cli._run 是本工具唯一的子进程入口，参数全部由本模块拼装（shellcheck/shfmt/git 及文件路径），
 # 不含用户拼接的 shell 字符串。删除条件：ruff 提供更精确的判定。
 # T201：cli 是命令行程序，report() 以 stdout 输出结果（与 eslint-config 对 scripts/** 放开 no-console 相同）。
