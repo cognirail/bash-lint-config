@@ -1,0 +1,22 @@
+# cognirail-bash-lint-config · shellcheck 基线
+#
+# 口径与 @cognirail/eslint-config 一致：默认最严（style 级别全报），可选检查全部启用，
+# 源码内不允许 `# shellcheck disable=` 逃逸（由 cli 守卫），项目层不能覆盖本文件。
+# shellcheck 不支持外部 rc 路径，本文件由 cli 解析后转成命令行参数传入。
+
+shell=bash
+severity=style
+external-sources=true
+
+# 可选检查：全部启用（`shellcheck --list-optional` 的完整清单）
+enable=add-default-case
+enable=avoid-negated-conditions
+enable=avoid-nullary-conditions
+enable=check-extra-masked-returns
+enable=check-set-e-suppressed
+enable=check-unassigned-uppercase
+enable=deprecate-which
+enable=quote-safe-variables
+enable=require-double-brackets
+enable=require-variable-braces
+enable=useless-use-of-cat

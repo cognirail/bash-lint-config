@@ -1,0 +1,9 @@
+# cognirail-bash-lint-config · shfmt 基线（每行一个参数，由 cli 读取后传给 shfmt）
+#
+# 对应 prettier 的角色：格式无需讨论，机器决定。
+-ln bash
+-i 2
+-ci
+-bn
+-sr
+-s

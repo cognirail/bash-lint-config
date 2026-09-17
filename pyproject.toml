@@ -1,0 +1,56 @@
+[project]
+name = "cognirail-bash-lint-config"
+version = "0.1.0"
+description = "Opinionated shellcheck + shfmt baseline for Bash — AI coding guardrails. Sister package of @cognirail/eslint-config."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "ISC"
+authors = [{ name = "halo xie" }]
+keywords = ["shellcheck", "shfmt", "bash", "lint", "ai-coding", "guardrails"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+]
+# shellcheck / shfmt 二进制随 wheel 分发，安装即得，不依赖 brew。
+dependencies = [
+    "shellcheck-py==0.11.0.1",
+    "shfmt-py==4.2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/cognirail/bash-lint-config#readme"
+Repository = "https://github.com/cognirail/bash-lint-config.git"
+Issues = "https://github.com/cognirail/bash-lint-config/issues"
+
+[project.scripts]
+cognirail-bash-lint-config = "cognirail_bash_lint_config.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cognirail_bash_lint_config"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/", "scripts/", "README.md", "pyproject.toml"]
+
+# 本包的 Python 源码遵守姊妹包 cognirail-python-lint-config 的基线（dogfooding）。
+[dependency-groups]
+dev = ["cognirail-python-lint-config"]
+
+[tool.uv.sources]
+cognirail-python-lint-config = { path = "../python-lint-config", editable = true }
+
+[tool.ruff]
+extend = "../python-lint-config/src/cognirail_python_lint_config/configs/ruff.toml"
+
+[tool.ruff.lint.per-file-ignores]
+# 具名特例：cli._run 是本工具唯一的子进程入口，参数全部由本模块拼装（shellcheck/shfmt/git 及文件路径），
+# 不含用户拼接的 shell 字符串。删除条件：ruff 提供更精确的判定。
+# T201：cli 是命令行程序，report() 以 stdout 输出结果（与 eslint-config 对 scripts/** 放开 no-console 相同）。
+"src/cognirail_bash_lint_config/cli.py" = ["S603", "T201"]
+# 具名特例：smoke 脚本以 stdout 报告结果。
+"scripts/smoke.py" = ["T201"]
