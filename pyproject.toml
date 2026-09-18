@@ -35,7 +35,7 @@ build-backend = "hatchling.build"
 packages = ["src/cognirail_bash_lint_config"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/", "scripts/", "README.md", "pyproject.toml"]
+include = ["src/", "scripts/", "README.md", "LICENSE", "pyproject.toml"]
 
 # 本包的 Python 源码遵守姊妹包 cognirail-python-lint-config 的基线。
 # 两个可发布仓之间不建立 path 依赖：开发时用 `uvx cognirail-python-lint-config check` 走公开 CLI，

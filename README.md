@@ -2,18 +2,18 @@
 
 Opinionated **shellcheck + shfmt** baseline for Bash — the shell sister of
 [`@cognirail/eslint-config`](https://github.com/cognirail/eslint-config) and
-[`cognirail-python-lint-config`](https://github.com/cognirail/python-lint-config).
+`cognirail-python-lint-config`.
 
 Designed as **AI coding guardrails**: shellcheck at `style` severity with every optional check on,
 machine-decided formatting, and **no inline escape hatches**. One package, one command, zero config.
 
 ## What it runs
 
-| Tool | Purpose | Baseline |
-| ---- | ------- | -------- |
-| [`shellcheck`](https://www.shellcheck.net/) | Static analysis — `--severity=style`, all 11 optional checks enabled | `configs/shellcheckrc` |
-| [`shfmt`](https://github.com/mvdan/sh) | Formatting — 2-space indent, indented `case`, binary ops at line start, simplified | `configs/shfmt.txt` |
-| escape-hatch guard | Rejects `# shellcheck disable=` / `enable=` / `shell=` / `source-path=` inside scripts | built in |
+| Tool                                        | Purpose                                                                                | Baseline               |
+| ------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------- |
+| [`shellcheck`](https://www.shellcheck.net/) | Static analysis — `--severity=style`, all 11 optional checks enabled                   | `configs/shellcheckrc` |
+| [`shfmt`](https://github.com/mvdan/sh)      | Formatting — 2-space indent, indented `case`, binary ops at line start, simplified     | `configs/shfmt.txt`    |
+| escape-hatch guard                          | Rejects `# shellcheck disable=` / `enable=` / `shell=` / `source-path=` inside scripts | built in               |
 
 Both binaries ship inside the wheels (`shellcheck-py`, `shfmt-py`) and are **pinned exactly**, so no
 Homebrew/apt step and every consumer lints with the same engine.
@@ -83,4 +83,4 @@ repositories have no path dependency on each other.
 
 ## License
 
-ISC
+[ISC](./LICENSE)
