@@ -2,7 +2,7 @@
 
 Opinionated **shellcheck + shfmt** baseline for Bash — the shell sister of
 [`@cognirail/eslint-config`](https://github.com/cognirail/eslint-config) and
-`cognirail-python-lint-config`.
+[`cognirail-python-lint-config`](https://github.com/cognirail/python-lint-config).
 
 Designed as **AI coding guardrails**: shellcheck at `style` severity with every optional check on,
 machine-decided formatting, and **no inline escape hatches**. One package, one command, zero config.
@@ -69,11 +69,11 @@ script — never a directive inside it.
 uv sync
 uv run scripts/smoke.py                       # temp-project smoke test (mirrors eslint-config/scripts/smoke.mjs)
 uvx cognirail-python-lint-config check        # this package's Python follows the sister baseline via its public CLI
-uv run cognirail-bash-lint-config check      # (no Bash in this repo; sanity: exits 0)
+uv run cognirail-bash-lint-config check       # (no Bash in this repo; sanity: exits 0)
+```
 
 The sister baseline is consumed only through its CLI (it syncs `.cognirail/ruff-baseline.toml`); the two
 repositories have no path dependency on each other.
-```
 
 ## Versioning
 
