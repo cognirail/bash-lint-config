@@ -79,6 +79,12 @@ def run() -> None:
         hatch = _project(tmp / "c", **{"hatch.sh": HATCH})
         expect(_check(hatch, "check") == 1, "脚本内 shellcheck disable 应被守卫拒绝")
 
+        rc = _project(
+            tmp / "e",
+            **{"rc.sh": "#!/usr/bin/env bash\necho $1\n", ".shellcheckrc": "disable=SC2086\n"},
+        )
+        expect(_check(rc, "check") == 1, "项目 .shellcheckrc 不应能关掉基线规则")
+
         bare = _project(tmp / "d", **{"run": NO_SUFFIX, "notes.txt": "not a script\n"})
         expect(
             _check(bare, "check") == 0, "无后缀但带 bash shebang 的文件应被识别并通过；txt 不参与"

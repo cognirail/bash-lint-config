@@ -27,8 +27,8 @@ def _lines(path: Path) -> list[str]:
 
 
 def shellcheck_args() -> list[str]:
-    """把 shellcheckrc 基线转成 ``--key=value`` 参数（shellcheck 不接受外部 rc 路径）。"""
-    args: list[str] = []
+    """把 shellcheckrc 基线转成 ``--key=value`` 参数；``--norc`` 屏蔽项目 rc。"""
+    args: list[str] = ["--norc"]
     for line in _lines(SHELLCHECK_BASELINE):
         key, _, value = line.partition("=")
         if key == "external-sources":

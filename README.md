@@ -1,8 +1,10 @@
 # cognirail-bash-lint-config
 
 Opinionated **shellcheck + shfmt** baseline for Bash — the shell sister of
-[`@cognirail/eslint-config`](https://github.com/cognirail/eslint-config) and
-[`cognirail-python-lint-config`](https://github.com/cognirail/python-lint-config).
+[`@cognirail/eslint-config`](https://github.com/cognirail/eslint-config),
+[`cognirail-python-lint-config`](https://github.com/cognirail/python-lint-config),
+[`cognirail-go-lint-config`](https://github.com/cognirail/go-lint-config) and
+[`cognirail-rust-lint-config`](https://github.com/cognirail/rust-lint-config).
 
 Designed as **AI coding guardrails**: shellcheck at `style` severity with every optional check on,
 machine-decided formatting, and **no inline escape hatches**. One package, one command, zero config.
@@ -47,8 +49,8 @@ Bash files are `*.sh`, `*.bash`, or extension-less files whose shebang is `bash`
 
 ### 3. Project-level configuration
 
-There is none. shellcheck does not accept an external rc path, so the baseline is translated into
-command-line flags by the CLI and cannot be overridden by a project `.shellcheckrc`. If a rule is
+There is none. The CLI translates the baseline into command-line flags and passes `--norc`, so a project
+(or home-directory) `.shellcheckrc` is never read and cannot switch rules off. If a rule is
 genuinely wrong for a script, the fix is a code change or a reviewed exception documented next to the
 script — never a directive inside it.
 

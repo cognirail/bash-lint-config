@@ -2,7 +2,7 @@
 #
 # 口径与 @cognirail/eslint-config 一致：默认最严（style 级别全报），可选检查全部启用，
 # 源码内不允许 `# shellcheck disable=` 逃逸（由 cli 守卫），项目层不能覆盖本文件。
-# shellcheck 不支持外部 rc 路径，本文件由 cli 解析后转成命令行参数传入。
+# 本文件由 cli 解析后转成命令行参数传入，并附 `--norc`，项目或家目录的 .shellcheckrc 一律不读。
 
 shell=bash
 severity=style
